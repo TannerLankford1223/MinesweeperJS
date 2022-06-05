@@ -11,6 +11,7 @@ function Board() {
     const [gameOver, setGameOver] = useState(false);
     const [timerID, setTimerID] = useState(null);
 
+    // Initialize timer on mount of board
     useEffect(() => {
         newTimer();
         return () => {
@@ -31,15 +32,7 @@ function Board() {
     }, [timerID])
 
     useEffect(() => {
-        if (gameOver === true) {
-            console.log("gameover called");
-            // clearInterval(timerID);
-        }
-    }, [gameOver])
-
-    useEffect(() => {
         if (restart === true) {
-            console.log("restart called");
             newTimer();
             setRestart(false);
             setGameOver(false);
@@ -49,10 +42,10 @@ function Board() {
         };
     }, [restart])
 
+    // Clears timer ID and sets a new interval to increment the timer value
     const newTimer = () => {
         setTimer(0);
         if (timerID !== null) {
-            console.log("clearing timerID: " + timerID);
             clearInterval(timerID);
         }
         setTimerID(setInterval(() => {

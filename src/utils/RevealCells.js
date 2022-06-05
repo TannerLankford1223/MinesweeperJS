@@ -15,7 +15,7 @@ function revealCells(arr, x, y, emptySpacesLeft) {
         if (cell.value !== 0) {
             break;
         }
-
+        // Iterate over cells and add to array of cells to reveal
         if (i > 0 && j > 0 && arr[i - 1][j - 1].value === 0 && !arr[i - 1][j - 1].fired) {
             cellsToReveal.push(arr[i - 1][j - 1]);
         }
@@ -47,7 +47,7 @@ function revealCells(arr, x, y, emptySpacesLeft) {
             cellsToReveal.push(arr[i][j - 1]);
         }
 
-        // Reveal
+        // Iterate over cells and reveal
         if (i > 0 && j > 0 && !arr[i - 1][j - 1].fired) {
             arr[i - 1][j - 1].fired = true;
             emptySpacesLeft--;

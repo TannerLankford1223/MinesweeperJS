@@ -14,12 +14,12 @@ function Field({flagsLeft, setFlagsLeft, restart, setRestart, setGameOver}) {
     }, []);
 
     useEffect(() => {
-        console.log("restart = " + restart);
             newField();
             setRestart(false);
             setGameOver(false);
     }, [restart]);
 
+    // Checks for win state each time the field is changed
     useEffect(() => {
         checkForWin();
     }, [field])
@@ -64,6 +64,8 @@ function Field({flagsLeft, setFlagsLeft, restart, setRestart, setGameOver}) {
         }
     }
 
+    // Checks the value of the selected cell and updates the game state based
+    // on if the cell is a bomb or is bordering/not bordering a bomb
     const revealCell = (x, y) => {
         let newBoard = JSON.parse(JSON.stringify(field));
         let cell = newBoard[x][y];

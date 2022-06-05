@@ -36,6 +36,7 @@ function CreateBoard() {
 
     // Iterate through cells and count the number of adjacent bombs, incrementing the value of the cell
     // if any are found
+
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             if (board[i][j].bomb) {
