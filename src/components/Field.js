@@ -4,22 +4,20 @@ import Cell from "./Cell";
 import CreateBoard from "../utils/CreateBoard";
 import revealCells from "../utils/RevealCells";
 
-function Field({ setTimer, flagsLeft, setFlagsLeft, restart, setRestart }) {
+function Field({flagsLeft, setFlagsLeft, restart, setRestart, setGameOver}) {
     const [field, setField] = useState([]);
     const [mines, setMines] = useState([]);
     const [emptySpacesLeft, setEmptySpacesLeft] = useState(0);
-    const [timerID, setTimerID] = useState(0);
 
     useEffect(() => {
         newField();
-        setRestart(false);
-        clearInterval(timerID);
-        setTimerID(setInterval(() => {
-            setTimer(prevTime => prevTime + 1);
-        }, 1000));
-        return () => {
-            clearInterval(timerID);
-        };
+    }, []);
+
+    useEffect(() => {
+        console.log("restart = " + restart);
+            newField();
+            setRestart(false);
+            setGameOver(false);
     }, [restart]);
 
     useEffect(() => {
@@ -32,7 +30,6 @@ function Field({ setTimer, flagsLeft, setFlagsLeft, restart, setRestart }) {
         setField(field.board);
         setEmptySpacesLeft(field.emptySpaces);
         setFlagsLeft(10);
-        setTimer(0);
     }
 
     const checkForWin = () => {
@@ -71,7 +68,7 @@ function Field({ setTimer, flagsLeft, setFlagsLeft, restart, setRestart }) {
         let newBoard = JSON.parse(JSON.stringify(field));
         let cell = newBoard[x][y];
         if (cell.bomb) {
-            clearInterval(timerID);
+            setGameOver(true);
             for (let i = 0; i < mines.length; i++) {
                 newBoard[mines[i][0]][mines[i][1]].fired = true;
             }

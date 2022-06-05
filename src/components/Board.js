@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/css/Board.css";
 import Banner from "./Banner"
 import Control from "./ControlPanel"
@@ -8,6 +8,57 @@ function Board() {
     const [timer, setTimer] = useState(0);
     const [flagsLeft, setFlagsLeft] = useState(10);
     const [restart, setRestart] = useState(false);
+    const [gameOver, setGameOver] = useState(false);
+    const [timerID, setTimerID] = useState(null);
+
+    useEffect(() => {
+        newTimer();
+        return () => {
+            clearInterval(timerID);
+        };
+    }, [])
+
+    useEffect(() => {
+        if (restart === true || gameOver === true) {
+            if (timerID !== 0) {
+                clearInterval(timerID);
+            }
+        }
+    }, [restart, gameOver])
+
+    useEffect(() => {
+        console.log("timerID set: " + timerID);
+    }, [timerID])
+
+    useEffect(() => {
+        if (gameOver === true) {
+            console.log("gameover called");
+            // clearInterval(timerID);
+        }
+    }, [gameOver])
+
+    useEffect(() => {
+        if (restart === true) {
+            console.log("restart called");
+            newTimer();
+            setRestart(false);
+            setGameOver(false);
+        }
+        return () => {
+            clearInterval(timerID);
+        };
+    }, [restart])
+
+    const newTimer = () => {
+        setTimer(0);
+        if (timerID !== null) {
+            console.log("clearing timerID: " + timerID);
+            clearInterval(timerID);
+        }
+        setTimerID(setInterval(() => {
+            setTimer(prevTime => prevTime + 1);
+        }, 1000));
+    }
 
     const handleClick = () => {
         alert("To win you must be open all spaces not containing bombs.\n\n" +
@@ -21,8 +72,8 @@ function Board() {
         <div className="board" onContextMenu={(e) => e.preventDefault()}>
             <Banner />
             <Control timer={timer} flagsLeft={flagsLeft} setRestart={setRestart} />
-            <Field timer={timer} setTimer={setTimer} flagsLeft={flagsLeft} setFlagsLeft={setFlagsLeft}
-                restart={restart} setRestart={setRestart} />
+            <Field flagsLeft={flagsLeft} setFlagsLeft={setFlagsLeft}
+                restart={restart} setRestart={setRestart} setGameOver={setGameOver}/>
             <button className="help-btn" onClick={handleClick}>Help</button>
         </div>
     )
