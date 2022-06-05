@@ -1,0 +1,30 @@
+.board {
+    width: 500px;
+    height: 670px;
+    background-color: #4297A0;
+    margin-top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px 0 #E57F84, 0 8px 30px 0 #E57F84;
+}
+
+.help-btn {
+    font-family: "Cabin", sans-serif;
+    color: #2F5061;
+    background-color: ivory;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-top: 15px;
+    margin-left: 27px;
+}
+
+.help-btn:hover {
+    box-shadow: 0 0 10px 5px #E57F84;
+}
+
+.help-btn:active {
+    color: ivory;
+    background-color: #2F5061;
+}

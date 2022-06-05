@@ -1,0 +1,26 @@
+.banner {
+    float: left;
+    display: inline-flex;
+    width: 100%;
+}
+
+.game-header {
+    position: relative;
+    font-size: 50px;
+    color: ivory;
+    font-family: "Cabin", sans-serif;
+    margin: 5px;
+    margin-left: 100px;
+}
+
+@keyframes spin {
+    100% {transform: rotate(360deg);}
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
+    margin-left: 10px;
+    animation: spin 10s linear infinite;
+}

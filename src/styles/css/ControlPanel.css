@@ -1,0 +1,36 @@
+.control-panel {
+    font-family: "Cabin", sans-serif;
+    font-size: 25px;
+    color: ivory;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.total-flag-count {
+    width: 25px;
+    height: 25px;
+}
+
+.restart-btn {
+    font-family: "Cabin", sans-serif;
+    color: ivory;
+    font-size: 20px;
+    background-color: #2F5061;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.restart-btn:hover {
+    box-shadow: 0 0 10px 5px #E57F84;
+}
+
+.restart-btn:active {
+    color: #2F5061;
+    background-color: ivory;
+}
