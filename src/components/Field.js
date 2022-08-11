@@ -34,6 +34,7 @@ function Field({flagsLeft, setFlagsLeft, restart, setRestart, setGameOver}) {
 
     const checkForWin = () => {
         if (emptySpacesLeft === 0 && flagsLeft === 0) {
+            setGameOver(true);
             alert("You win!");
         }
     }
